@@ -21,6 +21,8 @@
     "tslib": "^2.3.0"
   },
  "dependencies": {
+  "@angular/build": "^22.1.8",
+  "@angular/cli": "^22.1.8",
   "@angular/common": "^22.1.0",
   "@angular/compiler": "^22.1.0",
   "@angular/core": "^22.1.0",
