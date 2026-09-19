@@ -55,7 +55,6 @@ app.post('/employees', async (req, res) => {
     res.status(400).json({ error: 'Failed to create employee' });
   }
 });
-
 app.put('/employees/:id', async (req, res) => {
   try {
     const updatedEmployee = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
