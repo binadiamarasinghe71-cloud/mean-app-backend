@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js"
-  },
+  "build": "tsc --target ES2022 --module NodeNext --moduleResolution NodeNext --rootDir ./src --outDir ./dist --strict false --skipLibCheck true",
+  "start": "node dist/index.js"
+},
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
