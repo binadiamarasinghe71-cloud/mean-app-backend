@@ -2,12 +2,15 @@
   "name": "server",
   "version": "1.0.0",
   "scripts": {
-    "start": "node --import tsx/esm src/index.ts"
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "mongoose": "^8.3.1",
-    "tsx": "^4.7.0"
+    "mongoose": "^8.3.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
   }
 }
