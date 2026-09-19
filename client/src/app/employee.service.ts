@@ -7,8 +7,9 @@ import { Employee } from './employee.model';
   providedIn: 'root'
 })
 export class EmployeeService {
+  // Ensure this URL matches your active Render service URL exactly
   private apiUrl = 'https://mean-app-backend-amj3.onrender.com/employees';
-  
+
   constructor(private http: HttpClient) {}
 
   getEmployees(): Observable<Employee[]> {
@@ -19,11 +20,11 @@ export class EmployeeService {
     return this.http.post<Employee>(this.apiUrl, employee);
   }
 
-  deleteEmployee(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  updateEmployee(id: string, employee: Employee): Observable<Employee> {
+    return this.http.put<Employee>(`${this.apiUrl}/${id}`, employee);
   }
 
-  updateEmployee(id: string, employee: Employee): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, employee, { responseType: 'text' });
+  deleteEmployee(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
