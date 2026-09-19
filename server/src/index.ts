@@ -48,11 +48,13 @@ app.get('/employees', async (req, res) => {
 
 app.post('/employees', async (req, res) => {
   try {
+    console.log('Incoming employee data:', req.body);
     const newEmployee = new Employee(req.body);
     const savedEmployee = await newEmployee.save();
     res.status(201).json(savedEmployee);
-  } catch (err) {
-    res.status(400).json({ error: 'Failed to create employee' });
+  } catch (err: any) {
+    console.error('DETAILED BACKEND ERROR:', err);
+    res.status(400).json({ error: 'Failed to create employee', details: err.message });
   }
 });
 
