@@ -1,5 +1,26 @@
-<div style="padding: 20px; font-family: sans-serif; max-width: 600px;">
-  <h2>Employee Management</h2>
+<!-- Remove (ngSubmit) from form, use (click) directly on button -->
+<div style="margin-bottom: 30px; background: #f4f4f4; padding: 15px; border-radius: 5px;">
+  <h3>{{ isEditing ? 'Edit Employee' : 'Add New Employee' }}</h3>
+  <div style="margin-bottom: 10px;">
+    <label>Name: </label><br>
+    <input type="text" [(ngModel)]="newEmployee.name" name="name" style="width: 100%; padding: 5px;">
+  </div>
+  <div style="margin-bottom: 10px;">
+    <label>Position: </label><br>
+    <input type="text" [(ngModel)]="newEmployee.position" name="position" style="width: 100%; padding: 5px;">
+  </div>
+  <div style="margin-bottom: 10px;">
+    <label>Level: </label><br>
+    <select [(ngModel)]="newEmployee.level" name="level" style="width: 100%; padding: 5px;">
+      <option value="junior">Junior</option>
+      <option value="mid">Mid</option>
+      <option value="senior">Senior</option>
+    </select>
+  </div>
+  <button type="button" (click)="onSubmit()" style="padding: 8px 15px; background: #007bff; color: white; border: none; cursor: pointer; margin-right: 10px;">
+    {{ isEditing ? 'Update Employee' : 'Save Employee' }}
+  </button>
+</div>
 
   
   <!-- Add / Edit Employee Form -->
