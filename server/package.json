@@ -1,13 +1,8 @@
 {
-  "name": "server",
+  "name": "mean-stack-example",
   "version": "1.0.0",
   "scripts": {
-    "start": "node --import tsx/esm src/index.ts"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "mongoose": "^8.3.1",
-    "tsx": "^4.7.0"
+    "install-server": "cd server && npm install",
+    "start": "cd server && npm start"
   }
 }
