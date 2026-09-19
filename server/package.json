@@ -2,8 +2,8 @@
   "name": "server",
   "version": "1.0.0",
   "scripts": {
-    "start": "npx tsx src/index.ts"
-  },
+  "start": "node --import tsx/esm src/index.ts"
+},
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
