@@ -7,8 +7,7 @@ import { Employee } from './employee.model';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private url = 'http://localhost:5300';
-
+  private url = 'https://mean-app-backend-amj3.onrender.com';
   constructor(private http: HttpClient) {}
 
   getEmployees(): Observable<Employee[]> {
