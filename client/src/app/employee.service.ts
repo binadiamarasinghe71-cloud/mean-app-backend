@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Employee } from './employee.model';
+import { environment } from './environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-  // Ensure this URL matches your active Render service URL exactly
-  private apiUrl = 'https://mean-app-backend-amj3.onrender.com/employees';
+  private apiUrl = `${environment.apiUrl}/employees`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.apiUrl);
+  getEmployees(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  createEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.apiUrl, employee);
+  createEmployee(employee: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, employee);
   }
 
-  updateEmployee(id: string, employee: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiUrl}/${id}`, employee);
+  updateEmployee(id: string, employee: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, employee);
   }
 
   deleteEmployee(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 }
