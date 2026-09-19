@@ -7,23 +7,23 @@ import { Employee } from './employee.model';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private url = 'https://mean-app-backend-amj3.onrender.com';
+  private apiUrl = 'https://mean-app-backend-amj3.onrender.com/employees';
+  
   constructor(private http: HttpClient) {}
 
   getEmployees(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.url}/employees`);
+    return this.http.get<Employee[]>(this.apiUrl);
   }
 
   createEmployee(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(`${this.url}/employees`, employee);
+    return this.http.post<Employee>(this.apiUrl, employee);
   }
 
   deleteEmployee(id: string): Observable<any> {
-    return this.http.delete(`${this.url}/employees/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  // Add this update method
   updateEmployee(id: string, employee: Employee): Observable<any> {
-    return this.http.put(`${this.url}/employees/${id}`, employee, { responseType: 'text' });
+    return this.http.put(`${this.apiUrl}/${id}`, employee, { responseType: 'text' });
   }
 }
