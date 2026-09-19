@@ -6,12 +6,22 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI || '';
 
+const allowedOrigins = [
+  'https://mean-app-backend-alh4.vercel.app',
+  'http://localhost:4200'
+];
+
 app.use(cors({
-  origin: [
-    'https://mean-app-backend-alh4.vercel.app',
-    'http://localhost:4200'
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
+app.options('*', cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
 
