@@ -42,6 +42,8 @@ export class App implements OnInit {
   }
 
   onSubmit() {
+    console.log('Save button clicked! Payload:', this.newEmployee);
+    
     if (this.isEditing && this.currentEditId) {
       this.employeeService.updateEmployee(this.currentEditId, this.newEmployee).subscribe({
         next: () => {

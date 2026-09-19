@@ -1,8 +1,9 @@
 <div style="padding: 20px; font-family: sans-serif; max-width: 600px;">
   <h2>Employee Management</h2>
 
+  
   <!-- Add / Edit Employee Form -->
-  <form (ngSubmit)="onSubmit()" style="margin-bottom: 30px; background: #f4f4f4; padding: 15px; border-radius: 5px;">
+<form (submit)="$event.preventDefault(); onSubmit()" style="margin-bottom: 30px; background: #f4f4f4; padding: 15px; border-radius: 5px;">
     <h3>{{ isEditing ? 'Edit Employee' : 'Add New Employee' }}</h3>
     <div style="margin-bottom: 10px;">
       <label>Name: </label><br>
