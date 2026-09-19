@@ -17,10 +17,62 @@ app.use(cors({
 
 app.use(express.json());
 
+// --- Employee Schema and Model ---
+const employeeSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  position: { type: String, required: true },
+  level: { type: String, required: true }
+});
+
+const Employee = mongoose.model('Employee', employeeSchema);
+
+// --- API Routes ---
 app.get('/', (req, res) => {
   res.send('Mean Stack API is running successfully!');
 });
 
+// Get all employees
+app.get('/employees', async (req, res) => {
+  try {
+    const employees = await Employee.find();
+    res.json(employees);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch employees' });
+  }
+});
+
+// Create an employee
+app.post('/employees', async (req, res) => {
+  try {
+    const newEmployee = new Employee(req.body);
+    const savedEmployee = await newEmployee.save();
+    res.status(201).json(savedEmployee);
+  } catch (err) {
+    res.status(400).json({ error: 'Failed to create employee' });
+  }
+});
+
+// Update an employee
+app.put('/employees/:id', async (req, res) => {
+  try {
+    const updatedEmployee = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedEmployee);
+  } catch (err) {
+    res.status(400).json({ error: 'Failed to update employee' });
+  }
+});
+
+// Delete an employee
+app.delete('/employees/:id', async (req, res) => {
+  try {
+    await Employee.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Employee deleted successfully' });
+  } catch (err) {
+    res.status(400).json({ error: 'Failed to delete employee' });
+  }
+});
+
+// --- Server Startup ---
 async function startServer() {
   try {
     if (!MONGO_URI) {
