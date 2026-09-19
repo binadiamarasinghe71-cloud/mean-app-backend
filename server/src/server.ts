@@ -21,14 +21,17 @@ connectToDatabase(DATABASE_URI)
   .then(() => {
     const app = express();
     
-    // Enhanced CORS configuration to allow requests from your Vercel frontend
+    // Enhanced CORS configuration
     app.use(cors({
-      origin: "*", // Or you can restrict to "https://client-lyart-omega-79.vercel.app"
+      origin: "*", 
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"]
     }));
     
-    app.use(express.json()); // Ensures incoming JSON request bodies are parsed correctly
+    // Explicitly handle preflight OPTIONS requests for all routes
+    app.options("*", cors());
+    
+    app.use(express.json());
 
     app.use("/employees", employeeRouter);
 
@@ -36,7 +39,6 @@ connectToDatabase(DATABASE_URI)
       res.status(200).send({ status: "ok" });
     });
 
-    // Railway dynamically assigns a port; bind to 0.0.0.0 so external traffic can reach it
     const portNumber = process.env.PORT ? parseInt(process.env.PORT, 10) : 5300;
 
     app.listen(portNumber, "0.0.0.0" as string, () => {
