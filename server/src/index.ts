@@ -1,24 +1,18 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+
+// Environment variables
+const PORT = process.env.PORT || 10000;
 const MONGO_URI = process.env.MONGO_URI || '';
 
-// Bulletproof global CORS configuration
+// Enable CORS
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-  credentials: false
-}));
-
-app.options('*', cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-  credentials: false
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
@@ -55,6 +49,7 @@ app.post('/employees', async (req, res) => {
     res.status(400).json({ error: 'Failed to create employee' });
   }
 });
+
 app.put('/employees/:id', async (req, res) => {
   try {
     const updatedEmployee = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
