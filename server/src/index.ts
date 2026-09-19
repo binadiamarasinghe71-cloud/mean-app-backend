@@ -1,19 +1,12 @@
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+// Enable CORS for your Vercel frontend
+app.use(cors({
+  origin: 'https://mean-app-backend-alh4.vercel.app',
+  credentials: true
+}));
+
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send('MEAN Stack Backend is running!');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
