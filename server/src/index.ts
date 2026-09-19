@@ -1,9 +1,7 @@
-import express from 'express';
-import cors from 'cors';
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err);
+});
 
-const app = express();
-
-// Allow all origins to rule out any strict CORS mismatch
-app.use(cors());
-
-app.use(express.json());
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('UNHANDLED REJECTION:', reason);
+});
