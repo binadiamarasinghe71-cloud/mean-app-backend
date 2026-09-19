@@ -21,7 +21,13 @@ connectToDatabase(DATABASE_URI)
   .then(() => {
     const app = express();
     
-    app.use(cors());
+    // Enhanced CORS configuration to allow requests from your Vercel frontend
+    app.use(cors({
+      origin: "*", // Or you can restrict to "https://client-lyart-omega-79.vercel.app"
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type", "Authorization"]
+    }));
+    
     app.use(express.json()); // Ensures incoming JSON request bodies are parsed correctly
 
     app.use("/employees", employeeRouter);
