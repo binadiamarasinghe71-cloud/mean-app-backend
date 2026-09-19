@@ -1,0 +1,50 @@
+<div style="padding: 20px; font-family: sans-serif; max-width: 600px;">
+  <h2>Employee Management</h2>
+
+  <!-- Add / Edit Employee Form -->
+  <form (ngSubmit)="onSubmit()" style="margin-bottom: 30px; background: #f4f4f4; padding: 15px; border-radius: 5px;">
+    <h3>{{ isEditing ? 'Edit Employee' : 'Add New Employee' }}</h3>
+    <div style="margin-bottom: 10px;">
+      <label>Name: </label><br>
+      <input type="text" [(ngModel)]="newEmployee.name" name="name" required style="width: 100%; padding: 5px;">
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label>Position: </label><br>
+      <input type="text" [(ngModel)]="newEmployee.position" name="position" required style="width: 100%; padding: 5px;">
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label>Level: </label><br>
+      <select [(ngModel)]="newEmployee.level" name="level" style="width: 100%; padding: 5px;">
+        <option value="junior">Junior</option>
+        <option value="mid">Mid</option>
+        <option value="senior">Senior</option>
+      </select>
+    </div>
+    <button type="submit" style="padding: 8px 15px; background: #007bff; color: white; border: none; cursor: pointer; margin-right: 10px;">
+      {{ isEditing ? 'Update Employee' : 'Save Employee' }}
+    </button>
+    <button *ngIf="isEditing" type="button" (click)="resetForm()" style="padding: 8px 15px; background: #6c757d; color: white; border: none; cursor: pointer;">
+      Cancel
+    </button>
+  </form>
+
+  <!-- Employee List Section with Search Bar -->
+  <h3>Employee List from MongoDB</h3>
+  
+  <!-- Search Input -->
+  <div style="margin-bottom: 15px;">
+    <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="onSearchChange()" placeholder="Search by name or position..." style="width: 100%; padding: 8px; box-sizing: border-box;">
+  </div>
+
+  <ul>
+    <li *ngFor="let emp of employees$ | async" style="margin-bottom: 10px;">
+      <strong>{{ emp.name }}</strong> - {{ emp.position }} ({{ emp.level }})
+      <button (click)="editEmployee(emp)" style="margin-left: 15px; background: #ffc107; color: black; border: none; padding: 3px 8px; cursor: pointer; border-radius: 3px;">
+        Edit
+      </button>
+      <button (click)="deleteEmployee(emp._id)" style="margin-left: 5px; background: #dc3545; color: white; border: none; padding: 3px 8px; cursor: pointer; border-radius: 3px;">
+        Delete
+      </button>
+    </li>
+  </ul>
+</div>
